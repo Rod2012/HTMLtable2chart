@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTMLtable2chart Column Chart</title>
+	<script type="text/javascript" src="js/HTMLtable2chart/graficarTortas.js"></script>
+	<script type="text/javascript" src="js/HTMLtable2chart/graficarBarras.js"></script>
+	<script type="text/javascript" src="js/HTMLtable2chart/tabla2array.js"></script>
+	<style type="text/css">
+		th{
+			border: 1px solid black;
+			background-color: #d4d1dd;
+		}
+		td{
+			border: 1px solid black;
+			text-align: center;
+		}
+		pre{
+			font-family: "Courier New" Courier monospace;
+			background-color: #eeeeee;
+		}
+	</style>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
+<body><!--  onload="obtener_datos_tabla_convertir_en_array('myTabla',graficarXY,'grafico','750','480')" -->
+<h1>HTMLtable2chart</h1>
+<hr>
+Version: 0.1.0
+
+HTMLtable2chart is a javascript library written to convert data that is in a HTML table into chart which is an image over a HTML5 canvas tag
+
+It was created to replace some charts made with the PHP JpGraph library.
+<h2>What is this?</h2>
+HTMLtable2chart is a javascript library written to convert data that is in a HTML table into chart which is an image over a HTML5 canvas tag
+<br>
+It was created to replace some chart made with the PHP JPGraph library.
+<h2>How to use</h2>
+If you have a html table like this:
+<br>
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Canada</th>
+				<th>USA</th>
+				<th>Mexico</th>
+				<th>Venezuela</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Male</td>
+				<td>1685</td>
+				<td>734</td>
+				<td>278</td>
+				<td>1582</td>
+			</tr>
+			<tr>
+				<td>Female</td>
+				<td>1521</td>
+				<td>509</td>
+				<td>210</td>
+				<td>1344</td>
+			</tr>			
+		</tbody>
+	</table>
+<br>
+Created with the following <b>html</b> code 
+<pre class="prettyprint">
+	<code>
+&lt;table id="myTable"&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;&lt;/th&gt;
+			&lt;th&gt;USA&lt;/th&gt;
+			&lt;th&gt;Canada&lt;/th&gt;
+			&lt;th&gt;Mexico&lt;/th&gt;
+			&lt;th&gt;Venezuela&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;Male&lt;/td&gt;
+			&lt;td&gt;1685&lt;/td&gt;
+			&lt;td&gt;734&lt;/td&gt;
+			&lt;td&gt;278&lt;/td&gt;
+			&lt;td&gt;1582&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;Female&lt;/td&gt;
+			&lt;td&gt;1521&lt;/td&gt;
+			&lt;td&gt;509&lt;/td&gt;
+			&lt;td&gt;210&lt;/td&gt;
+			&lt;td&gt;1344&lt;/td&gt;
+		&lt;/tr&gt;			
+	&lt;/tbody&gt;
+&lt;/table&gt;
+	</code>
+</pre>
+
+	<!-- <canvas id="grafico" width="750" height="480" style="border: 1px solid black;">No soporta canvas</canvas>  -->
+	<canvas id="grafico2" width="750" height="480" style="border: 1px solid black;">No soporta canvas</canvas>
+	<img id="myFondo" alt="" src="img/bandera.png" style="display: none;">
+	
+	
+<h2>How it works</h2>
+</body>
+<script type="text/javascript">
+var misParam ={
+	miMargen : 0.80,
+	separZonas : 0.05,
+	tituloGraf : "Title of Chart",
+	tituloEjeX : "X axis title",
+	tituloEjeY : "Y Axis title",
+	nLineasDiv : 10,
+	mysColores :[
+		                 ["rgba(93,18,18,1)","rgba(196,19,24,1)"],  //rojos
+		                 ["rgba(171,115,51,1)","rgba(251,163,1,1)"], //amarillos
+	            ],
+
+	anchoLinea : 2,
+	radioTorta : 0.4
+};
+
+//obtener_datos_tabla_convertir_en_array('myTabla',graficarTortas,'grafico','750','480',misParam);
+obtener_datos_tabla_convertir_en_array('myTable',graficarBarras,'grafico2','750','480',misParam,false);
+
+</script>
+</html>
