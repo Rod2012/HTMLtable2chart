@@ -65,6 +65,7 @@ function graficarTortas(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 		myRotulo = rotulo;
 		myLegenda = rotulo;
 	}
+	
 	/**
 	 * Dibuja el rect&aacute;ngulo interno donde se va a graficar,
 	 * escribe el t&iacute;tulo del gr&aacute;fico, de los ejes y 
@@ -79,9 +80,9 @@ function graficarTortas(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 		if (canvas.getContext) {
 			var ctx = canvas.getContext('2d');
 			if(!document.getElementById("myFondo"))
-				throw "No se encuentra imagen de fondo.";
-			//imagen de fondo
-			ctx.drawImage(document.getElementById("myFondo"), ((1-miMargen)/2)*x, ((1-miMargen)/2)*y,miMargen*x,miMargen*y);
+				console.log("No se encuentra imagen de fondo.");
+			else//imagen de fondo
+				ctx.drawImage(document.getElementById("myFondo"), ((1-miMargen)/2)*x, ((1-miMargen)/2)*y,miMargen*x,miMargen*y);
 			ctx.strokeStyle = "rgba(190,190,190,1)";
 			ctx.lineWidth = 0.5;
 			ctx.strokeRect(((1-miMargen)/2)*x,((1-miMargen)/2)*y,miMargen*x,miMargen*y);

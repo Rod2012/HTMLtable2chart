@@ -14,6 +14,12 @@ Como esta librería se ejecutará en un navegador de un cliente, dependerá prin
 ```
 HTMLtable2chart/
 ├── doc/
+│   └──examples/
+│      ├──en/
+│      └──es/
+│         ├── columnas.html
+│         ├── lineas.html
+│         └── tortas.html    
 ├── img/
 │   ├── bandera.png
 │   ├── barras.png

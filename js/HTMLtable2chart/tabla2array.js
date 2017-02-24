@@ -2,10 +2,10 @@
  * Esta es la funci&oacute;n que debe ser llamada para comenzar el proceso de graficar
  * 
  * @param quien string, id de la tabla que se va a graficar
- * @param myFunct function, es la funci&oacute; que indica que tipo de gr&aacute se quiere graficar
+ * @param myFunct function, es la funci&oacute;n que indica que tipo de gr&aacute;fico se quiere graficar
  * @param donde string, es el id del canvas donde se quiere graficar
  * @param ancho string, ancho del gr&aacute;fico
- * @param alto string, largo del gr&aacute;fico
+ * @param alto string, alto del gr&aacute;fico
  * @param losParam jsobj, par&aacute;metros configurables del gr&aacute;fico  
  * @param traspon boolean, indica si se las series vienen dadas por las filas o por las columnas 
  */

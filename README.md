@@ -13,6 +13,12 @@ As this library will run in a client's browser, it will depend mainly whether th
 ```
 HTMLtable2chart/
 ├── doc/
+│   └──examples/
+│      ├──en/
+│      └──es/
+│         ├── columnas.html
+│         ├── lineas.html
+│         └── tortas.html    
 ├── img/
 │   ├── bandera.png
 │   ├── barras.png
@@ -20,10 +26,10 @@ HTMLtable2chart/
 │   └── 
 ├── js/
 │   └──HTMLtable2chart/
-│       ├── graficarBarras.js
-│       ├── graficarTortas.js
-│       ├── graficarXY.js
-│       └── tabla2array.js
+│      ├── graficarBarras.js
+│      ├── graficarTortas.js
+│      ├── graficarXY.js
+│      └── tabla2array.js
 ├── readme.html
 └── README.md
 ```

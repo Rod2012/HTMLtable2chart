@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTMLtable2chart Gr&aacute;fico de Columnas</title>
+	<script type="text/javascript" src="../../../js/HTMLtable2chart/graficarBarras.js"></script>
+	<script type="text/javascript" src="../../../js/HTMLtable2chart/tabla2array.js"></script>
+	<style type="text/css">
+		th{
+			border: 1px solid black;
+			background-color: #d4d1dd;
+		}
+		td{
+			border: 1px solid black;
+			text-align: center;
+		}
+		pre{
+			font-family: "Courier New" Courier monospace;
+			background-color: #eeeeee;
+		}
+	</style>
+</head>
+<body>
+<div align="center">
+
+<h1>Gr&aacute;fico de Columnas</h1>
+<p>Importante dejar la primera celda de la cabecera en blanco</p>
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Canada</th>
+				<th>USA</th>
+				<th>Mexico</th>
+				<th>Venezuela</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Male</td>
+				<td>1685</td>
+				<td>734</td>
+				<td>278</td>
+				<td>1582</td>
+			</tr>
+			<tr>
+				<td>Female</td>
+				<td>1521</td>
+				<td>509</td>
+				<td>210</td>
+				<td>1344</td>
+			</tr>			
+		</tbody>
+	</table>
+	<br>
+	<canvas id="grafico1" width="750" height="480" style="border: 1px solid black;">No soporta canvas</canvas>
+	<!-- <img id="myFondo" alt="" src="../../../img/bandera.png" style="display: none;" /> -->
+	<p>Usando la misma tabla pero las series vienen en las columnas</p>
+	<canvas id="grafico2" width="750" height="480" style="border: 1px solid black;">No soporta canvas</canvas>
+	<p>Si se desea colocar una imagen de fondo se debe insertar este c&oacute;digo en cualquier parte del documento</p>
+	<pre>
+		<code>
+			&lt;img id="myFondo" alt="" src="../../../img/bandera.png" style="display: none;" /&gt;
+		</code>
+	</pre>
+	<p>Colocando la ruta correcta a la imagen que se desee. Y obligatoriamente dejando el mismo id <code>myFondo</code></p>
+</div>
+<script type="text/javascript">
+var misParam ={
+	miMargen : 0.80,
+	separZonas : 0.05,
+	tituloGraf : "Título del gráfico",
+	tituloEjeX : "Eje X ",
+	tituloEjeY : "Eje Y",
+	nLineasDiv : 10,
+	mysColores :[
+		                 ["rgba(93,18,18,1)","rgba(196,19,24,1)"],  //rojos
+		                 ["rgba(171,115,51,1)","rgba(251,163,1,1)"], //amarillos
+		                 ["rgba(9,54,11,1)","rgba(196,255,24,1)"], //verdes
+		                 ["rgba(0,10,93,1)","rgba(0,0,200,1)"], //azules
+		                 ["rgba(93,93,93,1)","rgba(150,150,150,1)"] //grises
+	            ],
+	anchoLinea : 2
+};
+
+
+obtener_datos_tabla_convertir_en_array('myTable',graficarBarras,'grafico1','750','480',misParam,false);
+obtener_datos_tabla_convertir_en_array('myTable',graficarBarras,'grafico2','750','480',misParam,true);
+</script>
+</body>
+</html>

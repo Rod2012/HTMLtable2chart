@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTMLtable2chart Gr&aacute;fico de L&iacute;neas</title>
+	<script type="text/javascript" src="../../../js/HTMLtable2chart/graficarXY.js"></script>
+	<script type="text/javascript" src="../../../js/HTMLtable2chart/tabla2array.js"></script>
+	<style type="text/css">
+		th{
+			border: 1px solid black;
+			background-color: #d4d1dd;
+		}
+		td{
+			border: 1px solid black;
+			text-align: center;
+		}
+		pre{
+			font-family: "Courier New" Courier monospace;
+			background-color: #eeeeee;
+		}
+	</style>
+</head>
+<body>
+<div align="center">
+
+<h1>Gr&aacute;fico de L&iacute;neas</h1>
+<p>Usando una tabla de pares ordenados</p>
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th>Var</th>
+				<th>(x1,y1)</th>
+				<th>(x2,y2)</th>
+				<th>(x3,y3)</th>
+				<th>(x4,y4)</th>
+				<th>(x5,y5)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>x</td>
+				<td>0</td>
+				<td>1</td>
+				<td>4</td>
+				<td>9</td>
+				<td>16</td>
+			</tr>
+			<tr>
+				<td>y</td>
+				<td>0</td>
+				<td>2</td>
+				<td>4.5</td>
+				<td>3</td>
+				<td>6</td>
+			</tr>			
+		</tbody>
+	</table>
+	<br>
+	<canvas id="grafico1" width="750" height="480" style="border: 1px solid black;">No soporta canvas</canvas>
+	<!-- <img id="myFondo" alt="" src="../../../img/bandera.png" style="display: none;" /> -->
+	<p>Usando los mismo datos pero graficando dos series contra el mismo eje x</p>
+	<table id="myTable2">
+		<thead>
+			<tr>
+				<th>Var</th>
+				<th>(x1,y1)</th>
+				<th>(x2,y2)</th>
+				<th>(x3,y3)</th>
+				<th>(x4,y4)</th>
+				<th>(x5,y5)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>x</td>
+				<td>0</td>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>y1</td>
+				<td>0</td>
+				<td>1</td>
+				<td>4</td>
+				<td>9</td>
+				<td>16</td>
+			</tr>
+			<tr>
+				<td>y2</td>
+				<td>0</td>
+				<td>2</td>
+				<td>4.5</td>
+				<td>3</td>
+				<td>6</td>
+			</tr>		
+		</tbody>
+	</table>
+	<p>Observe que fue agregado un columna con los n&uacute;meros correlativos</p>
+	<canvas id="grafico2" width="750" height="480" style="border: 1px solid black;">No soporta canvas</canvas>
+	<p>Usando una tabla donde las series vienen en las columnas</p>
+			<table id="myTable3">
+		<thead>
+			<tr>
+				<th>Var</th>
+				<th></th>
+				<th>(x1,y1)</th>
+				<th>(x2,y2)</th>
+				<th>(x3,y3)</th>
+				<th>(x4,y4)</th>
+				<th>(x5,y5)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>x</td>
+				<td>1</td>
+				<td>0</td>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>y1</td>
+				<td>2</td>
+				<td>0</td>
+				<td>1</td>
+				<td>4</td>
+				<td>9</td>
+				<td>16</td>
+			</tr>
+			<tr>
+				<td>y2</td>
+				<td>3</td>
+				<td>0</td>
+				<td>2</td>
+				<td>4.5</td>
+				<td>3</td>
+				<td>6</td>
+			</tr>		
+		</tbody>
+	</table>
+	<br>
+	<canvas id="grafico3" width="750" height="480" style="border: 1px solid black;">No soporta canvas</canvas>
+	<p>Si se desea colocar una imagen de fondo se debe insertar este c&oacute;digo en cualquier parte del documento</p>
+	<pre>
+		<code class="html">
+&lt;img id="myFondo" alt="" src="../../../img/bandera.png" style="display: none;" /&gt;
+		</code>
+	</pre>
+	<p>Colocando la ruta correcta a la imagen que se desee. Y obligatoriamente dejando el mismo id <code>myFondo</code></p>
+</div>
+<script type="text/javascript">
+var misParam ={
+	miMargen : 0.80,
+	separZonas : 0.05,
+	tituloGraf : "Título del Gráfico",
+	tituloEjeX : "Eje X",
+	tituloEjeY : "Eje Y",
+	nLineasDiv : 6,
+	anchoLinea : 1,
+	impEtiqDatX: false,
+	mysColores :[
+		                 ["rgba(93,18,18,1)","rgba(196,19,24,1)"],  //rojos
+		                 ["rgba(171,115,51,1)","rgba(251,163,1,1)"], //amarillos
+	            ]
+};
+var misParam2 ={
+		miMargen : 0.80,
+		separZonas : 0.05,
+		tituloGraf : "Título del Gráfico",
+		tituloEjeX : "Eje X",
+		tituloEjeY : "Eje Y",
+		nLineasDiv : 5,
+		anchoLinea : 2,
+		impEtiqDatX: false,
+		mysColores :[
+			                 ["rgba(93,18,18,1)","rgba(196,19,24,1)"],  //rojos
+			                 ["rgba(171,115,51,1)","rgba(251,163,1,1)"], //amarillos
+		            ]
+	};
+var misParam2 ={
+		miMargen : 0.80,
+		separZonas : 0.05,
+		tituloGraf : "Título del Gráfico",
+		tituloEjeX : "Eje X",
+		tituloEjeY : "Eje Y",
+		nLineasDiv : 4,
+		anchoLinea : 1,
+		impEtiqDatX: true,
+		mysColores :[
+							 ["rgba(0,0,0,1)","rgba(0,0,0,1)"], //negro
+			                 ["rgba(93,18,18,1)","rgba(196,19,24,1)"],  //rojos
+			                 ["rgba(171,115,51,1)","rgba(251,163,1,1)"], //amarillos
+			                 ["rgba(9,54,11,1)","rgba(196,255,24,1)"], //verdes
+			                 ["rgba(0,10,93,1)","rgba(0,0,200,1)"], //azules
+			                 ["rgba(93,93,93,1)","rgba(150,150,150,1)"] //grises
+		            ]
+	};
+obtener_datos_tabla_convertir_en_array('myTable' ,graficarXY,'grafico1','750','480',misParam, false);
+obtener_datos_tabla_convertir_en_array('myTable2',graficarXY,'grafico2','750','480',misParam2,false);
+obtener_datos_tabla_convertir_en_array('myTable3',graficarXY,'grafico3','750','480',misParam2,true);
+</script>
+</body>
+</html>
