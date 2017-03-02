@@ -78,7 +78,7 @@ Creada con el siguiente código **html**
 Descarga este paquete y colócalo los archivos `.js` en la ruta apropiada en tu proyecto, luego agrega dentro del elemento `<head>` en tu documento las siguientes etiquetas de script, como lo has hecho anteriormente con cualquier otra librería javascript
 
 ```html
-<script type="text/javascript" src="js/HTMLtable2chart/graficarTortas.js"></script>
+<script type="text/javascript" src="js/HTMLtable2chart/graficarBarras.js"></script>
 <script type="text/javascript" src="js/HTMLtable2chart/tabla2array.js"></script>
 ```
 Agrega un elemento canvas en el lugar donde quieres que el gráfico esté.

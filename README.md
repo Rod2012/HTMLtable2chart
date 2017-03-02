@@ -76,7 +76,7 @@ Created with the following **html** code
 Download this pack and you just put the `.js` files into appropriated path in your project, then add  to `<head>` element in your document the following script tags, as you have done before with any other javascript library
 
 ```html
-<script type="text/javascript" src="js/HTMLtable2chart/graficarTortas.js"></script>
+<script type="text/javascript" src="js/HTMLtable2chart/graficarBarras.js"></script>
 <script type="text/javascript" src="js/HTMLtable2chart/tabla2array.js"></script>
 ```
 
