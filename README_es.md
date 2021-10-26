@@ -39,7 +39,7 @@ HTMLtable2chart/
 ## Cómo lo uso
 Si tienes una tabla HTML como esta:
 
-  -  | Canada|USA|Mexico|Venezuela|
+&nbsp; | Canada|USA|Mexico|Venezuela|
 ----   |----| ---|----|----|
 Hombres|1685| 734| 278|1582|
 Mujeres|1521| 509| 210|1344|
