@@ -242,21 +242,22 @@ function graficarXY(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 	 * @returns {Number}
 	 */
 	function calcular_maxY(myVector,y) {
-		var mayor = 0;
-		var agregar = 0;
-		var max = 0;
-		for (var i = 0; i < myVector.length; i++) {
+		var mayor = 0.0;
+		var agregar = 0.0;
+		var max = 0.0;
+		for (var i = 1; i < myVector.length; i++) {
 			for (var j = 0; j < myVector[i].length; j++) {
+				//console.log(i,j,myVector[i][j]);
 				if (myVector[i][j] > mayor) {
 					mayor = myVector[i][j];
 				}
 			}
 		}
-	
+		console.log("mayor=",mayor);
 		max = mayor*(1+15/(miMargen*y));//1.0385;
-		agregar = 10 - ( max - Math.floor(max/10)*10 );
-		max = max + agregar;// 15 es el alto de la fuente
-		//console.log(max)
+		//agregar = 1 - ( max - Math.floor(max/10)*10 );
+		//max = max + agregar;// 15 es el alto de la fuente
+		console.log("maxy=",max);
 		return max;
 	}
 	/**
@@ -371,7 +372,7 @@ function graficarXY(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 				margenTexto = ctx.measureText(miTextX).width + 2;
 				ctx.fillText(miTextX, x0  + (miTextX/max)*xAncho - margenTexto/2, y0 + 14) ;
 			}
-			console.log("texto: "+miTextXX);
+			//console.log("texto: "+miTextXX);
 			//si quiere saber donde está el origen, descomente la linea siguiente
 			//ctx.fillText(":", x0  , y0 ) ;
 		}

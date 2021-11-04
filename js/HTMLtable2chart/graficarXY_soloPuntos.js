@@ -3,7 +3,7 @@
  * lineas con datos en el eje X e Y, hecho para sustituir a JPGraph
  * @author rsalcedo
  */
-function graficarXY(quien,ancho,alto,vector,rotulo,legenda,myParam) {
+function graficarXY_soloPuntos(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 	///////////////Parámetros a cambiar, variables globales
 	var miMargen = 0.80;//80%
 	var separZonas = 0.05;//5%
@@ -135,6 +135,7 @@ function graficarXY(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 			calcular_y_dibujar_lineas_div_vert_y_escala(quien,elMaxY,ancho,alto);
 			calcular_y_dibujar_lineas_div_hori_y_escala(quien,elMaxX,ancho,alto);
 			calcular_y_dibujar_serie(quien,myVector,zonas,ancho,alto);
+			calcular_y_dibujar_rectaRegrLin(quien,myVector,elMaxX,ancho,alto);
 		} catch (e) {
 			console.log("Algo salió mal: "+e.message);
 		}
@@ -189,7 +190,7 @@ function graficarXY(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 					yi_1 = ((1-miMargen)/2)*y + miMargen*y - miMargen*y * myVector[i][j-1]/elMaxY;
 					
 					ctx.moveTo(xi_1 , yi_1);
-					ctx.lineTo(xi   , yi);
+					//ctx.lineTo(xi   , yi);
 				}
 				//el punto
 				ctx.fillStyle = mysColores[i][1];
@@ -254,7 +255,7 @@ function graficarXY(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 		}
 	
 		max = mayor*(1+15/(miMargen*y));//1.0385;
-		agregar = 10 - ( max - Math.floor(max/10)*10 );
+		agregar = 1;
 		max = max + agregar;// 15 es el alto de la fuente
 		//console.log(max)
 		return max;
@@ -371,9 +372,135 @@ function graficarXY(quien,ancho,alto,vector,rotulo,legenda,myParam) {
 				margenTexto = ctx.measureText(miTextX).width + 2;
 				ctx.fillText(miTextX, x0  + (miTextX/max)*xAncho - margenTexto/2, y0 + 14) ;
 			}
-			console.log("texto: "+miTextXX);
+			//console.log("texto: "+miTextXX);
 			//si quiere saber donde está el origen, descomente la linea siguiente
 			//ctx.fillText(":", x0  , y0 ) ;
+		}
+	}
+	/**
+	 * Calcular m y b de la ecuación
+	 * y = mx + b
+	 */
+	function calcular_y_dibujar_rectaRegrLin(quien,myVector,maxEjeX,ancho,alto) {
+		let X=0.0;
+		let X2=0.0;
+		let sumX=0.0;
+		let sumX2=0.0;
+		let XY=0.0;
+		let Y=0.0;
+		let sumY=0.0;
+		let sumXY=0.0;
+		let mArr=[];
+		let bArr=[];
+		let n=0;
+		let minX=999999999999999;
+		let maxX=-99999999999999;
+		let SSres=0.0;
+		let SStot=0.0;
+		let margenTexto2=0;
+		let ctx;
+
+		canvas = document.getElementById(quien);
+	 	if (canvas.getContext){
+			ctx = canvas.getContext('2d');
+		}
+			
+
+		for (var i = 0; i < myVector.length; i++) {
+			//i=0 es x
+			sumY=0.0;
+			sumXY=0.0;
+			SSres=0.0;
+			SStot=0.0;
+			
+			for (var j = 0; j < myVector[i].length; j++) {
+				
+				if(i==0){
+					X=myVector[i][j];
+					X2=X*X;
+					sumX=sumX+X;
+					sumX2=sumX2+X2;
+
+					if (X < minX) {
+						minX = myVector[0][j];
+					}
+					if (X > maxX) {
+						maxX = myVector[0][j];
+					}
+
+				}else{
+					X=myVector[0][j];
+					Y=myVector[i][j];
+					XY=X*Y;
+					sumXY=sumXY+XY;
+					sumY=sumY+Y;
+
+				}
+			}
+			n=myVector[0].length;
+			//n=j;
+			if(i!=0){
+				m=(n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);
+				b=(sumX2*sumY-sumX*sumXY)/(n*sumX2-sumX*sumX);
+				mArr.push(m);
+				bArr.push(b);
+				//console.log(j+"=",n,sumX,sumY,sumX2,sumXY);
+				console.log("y="+Math.round(m*10000)/10000+"x+"+Math.round(b*10000)/10000);
+
+				ctx.beginPath();
+				ctx.strokeStyle =mysColores[i][1];
+				
+				x0Real=minX;
+				y0Real=m*minX + b;
+
+				x0 = ((1-miMargen)/2)*ancho + miMargen*ancho * (x0Real)/elMaxX;
+				y0 = ((1-miMargen)/2)*alto + miMargen*alto - miMargen*alto * (y0Real)/elMaxY;
+				
+				x1Real=maxX;
+				y1Real=m*maxX + b;
+				minY=0;
+				if(y1Real<minY){
+					y1Real=0;
+					x1Real=(-b/m);
+				}
+
+				x1 = ((1-miMargen)/2)*ancho + miMargen*ancho * (x1Real)/elMaxX;
+				y1 = ((1-miMargen)/2)*alto + miMargen*alto - miMargen*alto * (y1Real)/elMaxY;
+
+				ctx.moveTo( x0 , y0);
+				ctx.lineTo( x1 , y1);
+
+
+				for (let k = 0; k < myVector[i].length; k++) {
+					SSres=SSres+(myVector[i][k]-(m*myVector[0][k]+b))*((myVector[i][k]-(m*myVector[0][k]+b)));
+					SStot=SStot+(myVector[i][k]-sumY/n)*(myVector[i][k]-sumY/n);
+				}
+				R2=Math.round((1-SSres/SStot)*100000)/100000;
+				console.log("R2="+R2);
+				if(document.getElementById("eq")){
+					document.getElementById("eq").innerHTML=document.getElementById("eq").innerHTML+
+					"<br> ("+myLegenda[i]+") "+"y="+Math.round(m*10000)/10000+"x+"+Math.round(b*10000)/10000+
+					"&nbsp;&nbsp; R<sup>2</sup>="+R2+"";
+				}
+
+				for (let index = 0; index < myLegenda.length; index++) {
+					if(i==0){
+						margenTexto2 = 0;
+					}else{
+						margenTexto2 = margenTexto2 + ctx.measureText(myLegenda[i-1]).width + 30;
+					}
+					
+				}
+				txt="Linear "+myLegenda[i];
+				ctx.font = "italic 8pt monospace";
+				ctx.fillStyle = "rgba(0,0,0,1)";
+				ctx.fillText(txt, ((1-miMargen)/2)*ancho + margenTexto2 + 14 , alto-14, alto);
+				ctx.moveTo( ((1-miMargen)/2)*ancho + margenTexto2 -4 , alto-16);
+				ctx.lineTo(  ((1-miMargen)/2)*ancho + margenTexto2 + 8 , alto-16);
+				//margenTexto2 = margenTexto2 + ctx.measureText(txt).width + 30;
+				ctx.closePath();
+				ctx.stroke();
+			}
 		}
 	}
 }
